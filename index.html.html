@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <link rel="manifest" href="./manifest.json">
+ <meta name="theme-color" content="#1a0033">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <title>Hoo👠Kups - Encuentros Exclusivos y Sensuales</title>
+    <style>
+        :root {
+            --morado-fondo: #3A004E;
+            --morado-oscuro: #2A0250;
+            --rojo: #900018;
+            --dorado: #FFD700;
+            --blanco: #FFFFFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(180deg, var(--morado-oscuro) 0%, var(--morado-fondo) 100%);
+            min-height: 100vh;
+            color: var(--blanco);
+            padding: 1rem;
+        }
+
+        .pantalla {
+            display: none;
+            flex-direction: column;
+            min-height: 95vh;
+            max-width: 950px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .pantalla.activa {
+            display: flex;
+        }
+
+        .barra-sup {
+            text-align: center;
+            font-size: 0.95rem;
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 0.5rem;
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 0.8rem;
+        }
+
+        .logo h1 {
+            font-size: 2.8rem;
+            color: var(--dorado);
+            letter-spacing: 3px;
+        }
+
+        .logo p {
+            font-size: 1.2rem;
+            font-style: italic;
+            color: var(--dorado);
+            margin-top: 0.2rem;
+        }
+
+        .descripcion {
+            text-align: center;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            padding: 0 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .aviso {
+            border: 2px solid var(--dorado);
+            border-radius: 10px;
+            padding: 0.8rem;
+            text-align: center;
+            color: var(--dorado);
+            margin-bottom: 1.5rem;
+            background: rgba(255,215,0,0.08);
+            font-size: 0.9rem;
+        }
+
+        .btn-fila {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .btn-morado {
+            width: 300px;
+            padding: 12px;
+            background: var(--morado-fondo);
+            border: 3px solid var(--dorado);
+            border-radius: 50px;
+            color: var(--blanco);
+            font-size: 1rem;
+            cursor: pointer;
+            transition: 0.2s;
+            font-weight: bold;
+        }
+        .btn-morado:hover { background: var(--morado-oscuro); }
+
+        .btn-rojo-fila {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .btn-rojo {
+            width: 160px;
+            padding: 10px;
+            background: var(--rojo);
+            border: 3px solid var(--dorado);
+            border-radius: 8px;
+            color: var(--blanco);
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .btn-rojo:hover { opacity: 0.9; }
+
+        .enlace-creadora {
+            text-align: center;
+            color: var(--dorado);
+            text-decoration: underline;
+            cursor: pointer;
+            margin: 1rem 0;
+            font-weight: bold;
+        }
+        .enlace-creadora:hover { color: #ffffff; }
+
+        .barra-inf {
+            display: flex;
+            justify-content: space-between;
+            margin-top: auto;
+            padding-top: 1rem;
+            font-size: 0.75rem;
+            color: var(--dorado);
+            border-top: 1px solid rgba(255,215,0,0.2);
+        }
+
+        .campo, select.campo, textarea.campo {
+            width: 100%;
+            padding: 10px;
+            margin: 0.3rem 0 0.8rem;
+            border: 2px solid var(--dorado);
+            border-radius: 8px;
+            background: rgba(0,0,0,0.3);
+            color: #fff;
+            font-size: 0.95rem;
+        }
+
+        .etiqueta {
+            color: var(--dorado);
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+
+        .contenedor {
+            padding: 0 1rem;
+        }
+
+        .btn-atras {
+            color: var(--dorado);
+            cursor: pointer;
+            margin-bottom: 0.8rem;
+            display: inline-block;
+            font-weight: bold;
+        }
+        .btn-atras:hover { color: #ffffff; }
+
+        .grid-planes {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .tarjeta-plan {
+            border: 2px solid var(--dorado);
+            border-radius: 12px;
+            padding: 1rem;
+            background: rgba(0,0,0,0.35);
+            text-align: center;
+        }
+
+        .tarjeta-plan h3 {
+            color: var(--dorado);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .tarjeta-plan ul {
+            text-align: left;
+            font-size: 0.8rem;
+            margin-bottom: 1rem;
+            padding-left: 15px;
+            color: rgba(255,255,255,0.9);
+        }
+
+        .btn-plan {
+            background: var(--rojo);
+            border: 2px solid var(--dorado);
+            color: var(--blanco);
+            padding: 6px 10px;
+            border-radius: 15px;
+            cursor: pointer;
+            margin: 3px 0;
+            font-size: 0.8rem;
+            display: block;
+            width: 100%;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+
+        .btn-plan:hover {
+            background: var(--dorado);
+            color: #000;
+        }
+
+        .tarjeta-perfil {
+            border: 2px solid var(--dorado);
+            border-radius: 12px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            background: rgba(0,0,0,0.3);
+        }
+
+        .foto-perfil {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--morado-fondo), var(--dorado));
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+        }
+
+        .categoria-tag {
+            display: inline-block;
+            background: var(--dorado);
+            color: #000;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            margin: 0.2rem 0;
+        }
+
+        .precio {
+            color: var(--dorado);
+            font-size: 1rem;
+            font-weight: bold;
+            margin: 0.4rem 0;
+        }
+
+        .btn-contactar {
+            background: var(--rojo);
+            border: 2px solid var(--dorado);
+            color: #fff;
+            padding: 6px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: bold;
+        }
+
+        .panel-tarjetas-metricas {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .metrica-card {
+            border: 2px solid var(--dorado);
+            border-radius: 10px;
+            padding: 0.8rem;
+            text-align: center;
+            background: rgba(0,0,0,0.4);
+        }
+
+        .metrica-card h4 {
+            color: var(--dorado);
+            font-size: 0.85rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .metrica-card .valor {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .tabla-contenedor {
+            overflow-x: auto;
+            margin: 0.8rem 0;
+            border: 2px solid var(--dorado);
+            border-radius: 8px;
+            background: rgba(0,0,0,0.3);
+            max-height: 250px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 0.82rem;
+        }
+
+        th, td {
+            padding: 8px 10px;
+            border-bottom: 1px solid rgba(255,215,0,0.3);
+        }
+
+        th {
+            background: rgba(255,215,0,0.15);
+            color: var(--dorado);
+            position: sticky;
+            top: 0;
+        }
+
+        .badge-cortesia { background: #27ae60; color: white; padding: 2px 6px; border-radius: 8px; font-size: 0.7rem; }
+        .badge-suscrito { background: #2980b9; color: white; padding: 2px 6px; border-radius: 8px; font-size: 0.7rem; }
+
+        @media(max-width: 768px) {
+            .grid-planes { grid-template-columns: 1fr; }
+            .panel-tarjetas-metricas { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- 1. PANTALLA DE BIENVENIDA E INICIO -->
+<section class="pantalla activa" id="inicio">
+    <div class="barra-sup">Plataforma Exclusivamente para Adultos | 17 de Agosto de 2026</div>
+
+    <div class="logo">
+        <h1>HOO👠KUPS</h1>
+        <p>"Encuentros Exclusivos y Sensuales"</p>
+    </div>
+
+    <div class="descripcion">
+        Conecta con encuentros íntimos, discretos y seguros. 🎁 <strong>¡1 Semana de cortesía total al registrarte!</strong>
+    </div>
+
+    <div class="aviso">
+        ⚠️ Hookups no se hace responsable entre los acuerdos de costos y convenios que realicen los usuarios. No depositar a nadie que no sea Hookups.
+    </div>
+
+    <div class="btn-fila">
+        <button class="btn-morado" onclick="iniciarFlujo('Proveedor (Ofrecer)')">💋 Ofrecer un Servicio (1 Semana Gratis)</button>
+        <button class="btn-morado" onclick="iniciarFlujo('Cliente (Contratar)')">💎 Contratar un Servicio (Ver Perfiles)</button>
+    </div>
+
+    <div class="btn-rojo-fila">
+        <button class="btn-rojo" onclick="ir('ingresar')">Ingresar</button>
+        <button class="btn-rojo" onclick="ir('registrar')">Registrarse</button>
+    </div>
+
+    <div class="enlace-creadora" onclick="accesoCreadora()">👑 Acceso Exclusivo Creadora (Panel de Control)</div>
+
+    <div class="barra-inf">
+        <div>Plataforma creada por Hookups</div>
+        <div>Privacidad garantizada</div>
+        <div onclick="ir('registrar')" style="cursor:pointer;">Registrarse →</div>
+    </div>
+</section>
+
+<!-- 2. PANTALLA DE REGISTRO -->
+<section class="pantalla" id="registrar">
+    <div class="contenedor">
+        <span class="btn-atras" onclick="ir('inicio')">← Atrás</span>
+        <div class="logo">
+            <h1>HOO👠KUPS</h1>
+            <p>Registro de Nuevo Usuario</p>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+            <div>
+                <label class="etiqueta">Nombre completo / Seudónimo:</label>
+                <input type="text" id="reg-nombre" class="campo" placeholder="Tu nombre">
+            </div>
+            <div>
+                <label class="etiqueta">Apodo (cómo se mostrará en anuncios):</label>
+                <input type="text" id="reg-apodo" class="campo" placeholder="Ej: Valentina VIP">
+            </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+            <div>
+                <label class="etiqueta">Edad (Obligatorio - Mayores de 18):</label>
+                <input type="number" id="reg-edad" class="campo" placeholder="Ej: 25">
+            </div>
+            <div>
+                <label class="etiqueta">Tipo de cuenta:</label>
+                <select id="reg-tipo" class="campo">
+                    <option value="Cliente (Contratar)">Quiero Contratar un Servicio</option>
+                    <option value="Proveedor (Ofrecer)">Quiero Ofrecer un Servicio</option>
+                </select>
+            </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px;">
+            <div>
+                <label class="etiqueta">Idioma:</label>
+                <input type="text" id="reg-idioma" class="campo" value="Español">
+            </div>
+            <div>
+                <label class="etiqueta">País:</label>
+                <input type="text" id="reg-pais" class="campo" value="México">
+            </div>
+            <div>
+                <label class="etiqueta">Ciudad:</label>
+                <input type="text" id="reg-ciudad" class="campo" placeholder="Ciudad">
+            </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px;">
+            <div>
+                <label class="etiqueta">Estado:</label>
+                <input type="text" id="reg-estado" class="campo" placeholder="Estado">
+            </div>
+            <div>
+                <label class="etiqueta">Municipio:</label>
+                <input type="text" id="reg-municipio" class="campo" placeholder="Municipio">
+            </div>
+            <div>
+                <label class="etiqueta">Teléfono (para contactos):</label>
+                <input type="text" id="reg-tel" class="campo" placeholder="10 dígitos">
+            </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+            <div>
+                <label class="etiqueta">Correo electrónico:</label>
+                <input type="email" id="reg-correo" class="campo" placeholder="tu@correo.com">
+            </div>
+            <div>
+                <label class="etiqueta">Contraseña 🔑:</label>
+                <input type="password" id="reg-pass" class="campo" placeholder="Contraseña segura">
+            </div>
+        </div>
+
+        <button class="btn-morado" style="display:block; margin:1rem auto;" onclick="registrarUsuarioNuevo()">Registrarme con 1 Semana Gratis 🎁</button>
+        <p style="text-align:center; font-size:0.85rem;">¿Ya tienes cuenta? <span style="color:var(--dorado); cursor:pointer;" onclick="ir('ingresar')">Ingresa aquí</span></p>
+    </div>
+</section>
+
+<!-- 3. PANTALLA INGRESAR -->
+<section class="pantalla" id="ingresar">
+    <div class="contenedor">
+        <span class="btn-atras" onclick="ir('inicio')">← Atrás</span>
+        <div class="logo">
+            <h1>HOO👠KUPS</h1>
+            <p>Ingresar a mi Cuenta</p>
+        </div>
+        <label class="etiqueta">Correo electrónico:</label>
+        <input type="email" id="login-correo" class="campo" placeholder="tu@correo.com">
+        <label class="etiqueta">Contraseña 🔑:</label>
+        <input type="password" id="login-pass" class="campo" placeholder="Tu contraseña">
+        <button class="btn-morado" style="display:block; margin:1rem auto;" onclick="iniciarSesion()">Entrar</button>
+        <p style="text-align:center; font-size:0.85rem;">¿No tienes cuenta? <span style="color:var(--dorado); cursor:pointer;" onclick="ir('registrar')">Regístrate aquí</span></p>
+    </div>
+</section>
+
+<!-- 4. PANTALLA CLIENTE -->
+<section class="pantalla" id="pantalla-cliente">
+    <div class="contenedor">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem;">
+            <span class="btn-atras" onclick="cerrarSesion()">← Cerrar Sesión</span>
+            <span style="color:var(--dorado); font-size:0.85rem;">💎 Cortesía Activa (1 Semana)</span>
+        </div>
+        <div class="logo">
+            <h1>HOO👠KUPS</h1>
+            <p>Usuario Contratar un Servicio</p>
+        </div>
+
+        <div style="display:flex; gap:10px; margin-bottom:1rem;">
+            <select class="campo" id="filtro-categoria" onchange="filtrarPerfiles(this.value)">
+                <option value="todos">Todas las Categorías (Ver Todos)</option>
+                <option>Transexuales</option>
+                <option>Travestis</option>
+                <option>Mujeres Jóvenes</option>
+                <option>Mujeres Maduras</option>
+                <option>Hombres Activos</option>
+                <option>Hombres Pasivos</option>
+                <option>Tríos</option>
+                <option>Otros</option>
+            </select>
+            <button class="btn-rojo" style="width:180px; height:42px;" onclick="ir('planes-contratar')">Ver Planes 💎</button>
+        </div>
+
+        <h3 style="color:var(--dorado); margin-bottom:0.8rem;">Perfiles de Proveedores Disponibles</h3>
+        <div id="contenedor-perfiles-cliente"></div>
+    </div>
+</section>
+
+<!-- 5. PANTALLA PROVEEDOR -->
+<section class="pantalla" id="pantalla-proveedor">
+    <div class="contenedor">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem;">
+            <span class="btn-atras" onclick="cerrarSesion()">← Cerrar Sesión</span>
+            <span style="color:var(--dorado); font-size:0.85rem;">💋 Cortesía Activa (1 Semana)</span>
+        </div>
+        <div class="logo">
+            <h1>HOO👠KUPS</h1>
+            <p>Panel de Proveedor / Anuncios</p>
+        </div>
+
+        <div class="aviso">
+            ✨ Tu anuncio está activo durante tu semana de cortesía gratuita.
+        </div>
+
+        <div style="display:flex; gap:10px; margin-bottom:1rem;">
+            <button class="btn-morado" onclick="ir('planes-proveedor')">⚡ Suscribirme a Planes de Anunciante</button>
+            <button class="btn-rojo" onclick="alert('📸 Sube tus fotos y contenido gratis.')">Subir Contenido</button>
+        </div>
+
+        <h3 style="color:var(--dorado); margin-bottom:0.5rem;">Tu Anuncio Publicado Actualmente:</h3>
+        <div class="tarjeta-perfil">
+            <div class="foto-perfil">💋</div>
+            <h3 id="prov-card-nombre">Valentina VIP</h3>
+            <span class="categoria-tag">Mujeres Jóvenes</span>
+            <p>Amable, discreta y excelente compañía.</p>
+            <div class="precio">$1,500 MXN / hora</div>
+            <div style="font-size:0.8rem; color:var(--dorado);">📞 Teléfono visible para clientes con plan activo.</div>
+        </div>
+    </div>
+</section>
+
+<!-- 6. PLANES CLIENTE -->
+<section class="pantalla" id="planes-contratar">
+    <div class="contenedor">
+        <span class="btn-atras" onclick="ir('pantalla-cliente')">← Atrás</span>
+        <div class="logo">
+            <h1>HOO👠KUPS</h1>
+            <p>Planes para Usuario que Contrata</p>
+        </div>
+        <div class="grid-planes">
+            <div class="tarjeta-plan">
+                <h3>PLAN BÁSICO</h3>
+                <ul>
+                    <li>Ver quién ofrece servicio</li>
+                    <li>Interactuar con 3 perfiles</li>
+                </ul>
+                <button class="btn-plan" onclick="seleccionarPlan('Cliente', 'Básico', 'Semanal', 100)">Semanal: $100 MXN</button>
+                <button class="btn-plan" onclick="seleccionarPlan('Cliente', 'Básico', 'Mensual', 400)">Mensual: $400 MXN</button>
+            </div>
+            <div class="tarjeta-plan">
+                <h3>PLAN ESTÁNDAR</h3>
+                <ul>
+                    <li>Interactuar con 12 perfiles</li>
+                    <li>Ver contactos pasivos</li>
+                </ul>
+                <button class="btn-plan" onclick="seleccionarPlan('Cliente', 'Estándar', 'Semanal', 150)">Semanal: $150 MXN</button>
+                <button class="btn-plan" onclick="seleccionarPlan('Cliente', 'Estándar', 'Mensual', 250)">Mensual: $250 MXN</button>
+            </div>
+            <div class="tarjeta-plan">
+                <h3>PLAN PREMIUM</h3>
+                <ul>
+                    <li>Interactuar con 1000 perfiles</li>
+                    <li>Acceso total a imágenes</li>
+                </ul>
+                <button class="btn-plan" onclick="seleccionarPlan('Cliente', 'Premium', 'Semanal', 250)">Semanal: $250 MXN</button>
+                <button class="btn-plan" onclick="seleccionarPlan('Cliente', 'Premium', 'Mensual', 300)">Mensual: $300 MXN</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 7. PLANES PROVEEDOR -->
+<section class="pantalla" id="planes-proveedor">
+    <div class="contenedor">
+        <span class="btn-atras"onclick="ir('pantalla-proveedor')">← Atrás</span>
+        <div class="logo">
+            <h1>HOO👠KUPS</h1>
+            <p>Planes para Proveedor</p>
+        </div>
+        <div class="grid-planes">
+            <div class="tarjeta-plan">
+                <h3>PLAN BÁSICO</h3>
+                <ul>
+                    <li>2 anuncios diarios</li>
+                    <li>Recibir 5 mensajes / día</li>
+                </ul>
+                <button class="btn-plan" onclick="seleccionarPlan('Proveedor', 'Básico', 'Semanal', 50)">Semanal: $50 MXN</button>
+                <button class="btn-plan" onclick="seleccionarPlan('Proveedor', 'Básico', 'Mensual', 150)">Mensual: $150 MXN</button>
+            </div>
+            <div class="tarjeta-plan">
+                <h3>PLAN ESTÁNDAR</h3>
+                <ul>
+                    <li>6 anuncios diarios</li>
+                    <li>Venta de contenido</li>
+                </ul>
+                <button class="btn-plan" onclick="seleccionarPlan('Proveedor', 'Estándar', 'Semanal', 85)">Semanal: $85 MXN</button>
+                <button class="btn-plan" onclick="seleccionarPlan('Proveedor', 'Estándar', 'Mensual', 450)">Mensual: $450 MXN</button>
+            </div>
+            <div class="tarjeta-plan">
+                <h3>PLAN PREMIUM</h3>
+                <ul>
+                    <li>20 anuncios diarios</li>
+                    <li>Anuncios prioritarios</li>
+                </ul>
+                <button class="btn-plan" onclick="seleccionarPlan('Proveedor', 'Premium', 'Semanal', 150)">Semanal: $150 MXN</button>
+                <button class="btn-plan" onclick="seleccionarPlan('Proveedor', 'Premium', 'Mensual', 750)">Mensual: $750 MXN</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 8. PANTALLA DE PAGO (CON SPIN BY 0578 Y PAYPAL) -->
+<section class="pantalla" id="pantalla-pago">
+    <div class="contenedor">
+        <span class="btn-atras" onclick="ir(perfilActual && perfilActual.rol.includes('Cliente') ? 'pantalla-cliente' : 'pantalla-proveedor')">← Atrás</span>
+        <div class="logo">
+            <h1>HOO👠KUPS</h1>
+            <p>Selecciona tu Método de Pago</p>
+        </div>
+        
+        <div class="aviso">
+            🔒 Elige cómo deseas realizar tu pago de forma segura a través de Hookups.
+        </div>
+
+        <label class="etiqueta">Método de Pago:</label>
+        <select id="metodo-pago-select" class="campo" onchange="cambiarMetodoPago(this.value)">
+            <option value="SpinBy">Spin by OXXO (Tarjeta terminación 0578)</option>
+            <option value="PayPal">PayPal</option>
+        </select>
+
+        <!-- CONTENEDOR SPIN BY -->
+        <div id="seccion-spinby" style="border:2px solid var(--dorado); border-radius:8px; padding:1rem; background:rgba(0,0,0,0.3); margin-bottom:1rem;">
+            <h3 style="color:var(--dorado); margin-bottom:0.5rem;">💙 Pago con Spin by OXXO</h3>
+            <p style="font-size:0.9rem; margin-bottom:0.5rem;">Realiza tu transferencia o depósito directo a la tarjeta:</p>
+            <p style="font-size:1.1rem; font-weight:bold; color:var(--dorado);">Tarjeta Spin: 4217 4702 8439 0578</p>
+            <p style="font-size:0.8rem; margin-top:0.3rem; color:rgba(255,255,255,0.8);">Titular: Sined / Denise</p>
+        </div>
+
+        <!-- CONTENEDOR PAYPAL -->
+        <div id="seccion-paypal" style="display:none; border:2px solid var(--dorado); border-radius:8px; padding:1rem; background:rgba(0,0,0,0.3); margin-bottom:1rem;">
+            <h3 style="color:var(--dorado); margin-bottom:0.5rem;">🅿️ Pago Segura con PayPal</h3>
+            <p style="font-size:0.9rem; margin-bottom:0.5rem;">Serás vinculado a tu cuenta PayPal para procesar el cargo automático del plan seleccionado.</p>
+            <input type="email" class="campo" placeholder="Tu correo vinculado a PayPal">
+        </div>
+
+        <button class="btn-morado" style="display:block; margin:1.5rem auto;" onclick="procesarPagoPlan()">Confirmar Pago del Plan 💳</button>
+    </div>
+</section>
+
+<!-- 9. PANEL DE LA CREADORA (CON DETALLE DE MÉTODO DE PAGO) -->
+<section class="pantalla" id="panel-creadora">
+    <div class="contenedor">
+        <span class="btn-atras" onclick="cerrarSesion()">← Cerrar Sesión</span>
+        <div class="logo">
+            <h1>👑 HOO👠KUPS</h1>
+            <p>Panel de Control de Creadora (Denise / Sined)</p>
+        </div>
+        
+        <div class="aviso">
+            💜 Control total de usuarios, planes y desglose exacto de ingresos por Spin by (0578) o PayPal.
+        </div>
+
+        <h3 style="color:var(--dorado); margin-bottom:0.4rem;">📊 Reporte de Ingresos Financieros</h3>
+        <div class="panel-tarjetas-metricas">
+            <div class="metrica-card">
+                <h4>Ingresos Hoy</h4>
+                <div class="valor" id="ingreso-hoy">$0 MXN</div>
+            </div>
+            <div class="metrica-card">
+                <h4>Ingresos Esta Semana</h4>
+                <div class="valor" id="ingreso-semana">$0 MXN</div>
+            </div>
+            <div class="metrica-card">
+                <h4>Ingresos Este Año</h4>
+                <div class="valor" id="ingreso-anio">$0 MXN</div>
+            </div>
+        </div>
+
+        <h4 style="color:var(--dorado); margin-top:1rem; margin-bottom:0.3rem;">💵 Historial de Transacciones y Método de Pago</h4>
+        <div class="tabla-contenedor">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Fecha</th>
+                        <th>Usuario</th>
+                        <th>Plan / Periodicidad</th>
+                        <th>Método de Pago</th>
+                        <th>Monto</th>
+                    </tr>
+                </thead>
+                <tbody id="tabla-transacciones-body"></tbody>
+            </table>
+        </div>
+
+        <h3 style="color:var(--dorado); margin-top:1.2rem; margin-bottom:0.3rem;">👥 Registro General de Usuarios</h3>
+        <div class="tabla-contenedor">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nombre / Apodo</th>
+                        <th>Rol</th>
+                        <th>Edad</th>
+                        <th>Ubicación</th>
+                        <th>Registro</th>
+                        <th>Estado / Plan</th>
+                    </tr>
+                </thead>
+                <tbody id="tabla-usuarios-body"></tbody>
+            </table>
+        </div>
+
+        <button class="btn-morado" style="display:block; margin:1rem auto;" onclick="ir('pantalla-cliente')">Ver Plataforma como Cliente</button>
+    </div>
+</section>
+
+<script>
+    let baseUsuarios = JSON.parse(localStorage.getItem('hookups_usuarios')) || [
+        { nombre: "Carlos Méndez", apodo: "CarlosM", rol: "Cliente (Contratar)", edad: 29, ubicacion: "CDMX, Cuauhtémoc", correo: "carlos@mail.com", pass: "1234", fecha: "2026-08-10", estado: "Cortesía Activa" },
+        { nombre: "Valentina Ruiz", apodo: "Valentina VIP", rol: "Proveedor (Ofrecer)", edad: 24, ubicacion: "Morelos, Cuernavaca", correo: "valen@mail.com", pass: "1234", fecha: "2026-08-01", estado: "Suscrito (Estándar Mensual)" }
+    ];
+
+    let baseTransacciones = JSON.parse(localStorage.getItem('hookups_transacciones')) || [
+        { fecha: "2026-08-01", usuario: "Valentina Ruiz", plan: "Estándar Mensual", metodo: "Spin by OXXO (0578)", monto: 450 }
+    ];
+
+    let perfilActual = null;
+    let planSeleccionadoPendiente = null;
+
+    function guardarDatos() {
+        localStorage.setItem('hookups_usuarios', JSON.stringify(baseUsuarios));
+        localStorage.setItem('hookups_transacciones', JSON.stringify(baseTransacciones));
+    }
+
+    function ir(id) {
+        document.querySelectorAll('.pantalla').forEach(p => p.classList.remove('activa'));
+        document.getElementById(id).classList.add('activa');
+        window.scrollTo(0,0);
+
+        if (id === 'panel-creadora') {
+            actualizarPanelCreadora();
+        } else if (id === 'pantalla-cliente') {
+            renderizarPerfilesCliente('todos');
+        }
+    }
+
+    function limpiarFormularios() {
+        document.getElementById('reg-nombre').value = '';
+        document.getElementById('reg-apodo').value = '';
+        document.getElementById('reg-edad').value = '';
+        document.getElementById('reg-ciudad').value = '';
+        document.getElementById('reg-estado').value = '';
+        document.getElementById('reg-municipio').value = '';
+        document.getElementById('reg-tel').value = '';
+        document.getElementById('reg-correo').value = '';
+        document.getElementById('reg-pass').value = '';
+        document.getElementById('login-correo').value = '';
+        document.getElementById('login-pass').value = '';
+    }
+
+    function cerrarSesion() {
+        perfilActual = null;
+        limpiarFormularios();
+        ir('inicio');
+    }
+
+    function accesoCreadora() {
+        const clave = prompt("🔑 Escribe tu clave de Creadora:");
+        if (clave === "patoAzul34") {
+            ir("panel-creadora");
+        } else if (clave !== null) {
+            alert("⚠️ Clave incorrecta.");
+        }
+    }
+
+    function iniciarFlujo(tipoRol) {
+        limpiarFormularios();
+        document.getElementById('reg-tipo').value = tipoRol;
+        ir('registrar');
+    }
+
+    function registrarUsuarioNuevo() {
+        const nombre = document.getElementById('reg-nombre').value.trim();
+        const apodo = document.getElementById('reg-apodo').value.trim() || nombre;
+        const edad = parseInt(document.getElementById('reg-edad').value);
+        const tipo = document.getElementById('reg-tipo').value;
+        const ciudad = document.getElementById('reg-ciudad').value.trim();
+        const estado = document.getElementById('reg-estado').value.trim();
+        const municipio = document.getElementById('reg-municipio').value.trim();
+        const correo = document.getElementById('reg-correo').value.trim();
+        const pass = document.getElementById('reg-pass').value.trim();
+        const fechaHoy = new Date().toISOString().split('T')[0];
+
+        if (!edad || isNaN(edad) || edad < 18) {
+            alert("🚨 ACCESO DENEGADO: La plataforma es exclusiva para mayores de 18 años.");
+            return;
+        }
+
+        if (!correo || !pass || !nombre) {
+            alert("⚠️ Por favor completa los campos obligatorios.");
+            return;
+        }
+
+        if (baseUsuarios.find(u => u.correo === correo)) {
+            alert("⚠️ Este correo ya está registrado. Ingresa en la sección 'Ingresar'.");
+            ir('ingresar');
+            return;
+        }
+
+        const nuevoUser = {
+            nombre, apodo, rol: tipo, edad,
+            ubicacion: `${estado || 'N/A'}, ${municipio || ciudad || 'N/A'}`,
+            correo, pass, fecha: fechaHoy, estado: "Cortesía Activa (1 Sem)"
+        };
+
+        baseUsuarios.push(nuevoUser);
+        guardarDatos();
+        perfilActual = nuevoUser;
+
+        alert(`🎉 ¡Registro exitoso, ${apodo}!\n\nDisfrutas de 1 semana de cortesía gratuita.`);
+        limpiarFormularios();
+
+        if (tipo.includes('Cliente')) {
+            ir('pantalla-cliente');
+        } else {
+            document.getElementById('prov-card-nombre').innerText = apodo;
+            ir('pantalla-proveedor');
+        }
+    }
+
+    function iniciarSesion() {
+        const correo = document.getElementById('login-correo').value.trim();
+        const pass = document.getElementById('login-pass').value.trim();
+        const usuarioEncontrado = baseUsuarios.find(u => u.correo === correo && u.pass === pass);
+
+        if (usuarioEncontrado) {
+            perfilActual = usuarioEncontrado;
+            alert(`👋 ¡Bienvenido de vuelta, ${usuarioEncontrado.apodo || usuarioEncontrado.nombre}!`);
+            limpiarFormularios();
+            if (usuarioEncontrado.rol.includes('Cliente')) {
+                ir('pantalla-cliente');
+            } else {
+                document.getElementById('prov-card-nombre').innerText = usuarioEncontrado.apodo;
+                ir('pantalla-proveedor');
+            }
+        } else {
+            alert("⚠️ Correo o contraseña incorrectos.");
+        }
+    }
+
+    function seleccionarPlan(rolUsuario, plan, periodicidad, monto) {
+        planSeleccionadoPendiente = { rol: rolUsuario, plan, periodicidad, monto };
+        ir('pantalla-pago');
+    }
+
+    function cambiarMetodoPago(metodo) {
+        document.getElementById('seccion-spinby').style.display = metodo === 'SpinBy' ? 'block' : 'none';
+        document.getElementById('seccion-paypal').style.display = metodo === 'PayPal' ? 'block' : 'none';
+    }
+
+    function procesarPagoPlan() {
+        if (!planSeleccionadoPendiente) return;
+        const fechaHoy = new Date().toISOString().split('T')[0];
+        const metodoElegido = document.getElementById('metodo-pago-select').value;
+        const nombreMetodo = metodoElegido === 'SpinBy' ? 'Spin by OXXO (0578)' : 'PayPal';
+
+        baseTransacciones.push({
+            fecha: fechaHoy,
+            usuario: perfilActual ? perfilActual.apodo : "Usuario Suscriptor",
+            plan: `${planSeleccionadoPendiente.plan} (${planSeleccionadoPendiente.periodicidad})`,
+            metodo: nombreMetodo,
+            monto: planSeleccionadoPendiente.monto
+        });
+
+        if (perfilActual) {
+            perfilActual.estado = `Suscrito (${planSeleccionadoPendiente.plan})`;
+        }
+
+        guardarDatos();
+        alert(`🎉 ¡Pago procesado correctamente vía ${nombreMetodo}!\n\nMonto: $${planSeleccionadoPendiente.monto} MXN.`);
+        
+        if (perfilActual && perfilActual.rol.includes('Cliente')) {
+            ir('pantalla-cliente');
+        } else {
+            ir('pantalla-proveedor');
+        }
+    }
+
+    function renderizarPerfilesCliente() {
+        const proveedores = baseUsuarios.filter(u => u.rol.includes('Proveedor'));
+        let html = '';
+        proveedores.forEach((p) => {
+            html += `<div class="tarjeta-perfil">
+                <div class="foto-perfil">👠</div>
+                <h3>${p.apodo || p.nombre}, ${p.edad} años</h3>
+                <span class="categoria-tag">Proveedor Verificado</span>
+                <p>Ubicación: ${p.ubicacion} | Estado: ${p.estado}</p>
+                <div class="precio">$1,500 MXN / hora</div>
+                <button class="btn-contactar" onclick="alert('💬 Contactando a ${p.apodo}. Teléfono seguro.')">💬 Contactar Proveedor</button>
+            </div>`;
+        });
+        document.getElementById('contenedor-perfiles-cliente').innerHTML = html || '<p style="color:var(--dorado);">No hay proveedores registrados aún.</p>';
+    }
+
+    function filtrarPerfiles(cat) { renderizarPerfilesCliente(); }
+
+    function actualizarPanelCreadora() {
+        let totalHoy = 0, totalSemana = 2250, totalAnio = 4250;
+        baseTransacciones.forEach(t => {
+            totalHoy += t.monto;
+            totalSemana += t.monto;
+            totalAnio += t.monto;
+        });
+
+        document.getElementById('ingreso-hoy').innerText = `$${totalHoy} MXN`;
+        document.getElementById('ingreso-semana').innerText = `$${totalSemana} MXN`;
+        document.getElementById('ingreso-anio').innerText = `$${totalAnio} MXN`;
+
+        let htmlTrans = '';
+        baseTransacciones.forEach(t => {
+            htmlTrans += `<tr>
+                <td>${t.fecha}</td>
+                <td>${t.usuario}</td>
+                <td>${t.plan}</td>
+                <td><strong style="color:var(--dorado);">${t.metodo}</strong></td>
+                <td>$${t.monto} MXN</td>
+            </tr>`;
+        });
+        document.getElementById('tabla-transacciones-body').innerHTML = htmlTrans;
+
+        let htmlUsers = '';
+        baseUsuarios.forEach(u => {
+            let badge = u.estado.includes('Cortesía') ? '<span class="badge-cortesia">Cortesía</span>' : '<span class="badge-suscrito">Suscrito</span>';
+            htmlUsers += `<tr>
+                <td>${u.apodo} (${u.nombre})</td>
+                <td>${u.rol}</td>
+                <td>${u.edad} años</td>
+                <td>${u.ubicacion}</td>
+                <td>${u.fecha}</td>
+                <td>${badge}</td>
+            </tr>`;
+        });
+        document.getElementById('tabla-usuarios-body').innerHTML = htmlUsers;
+    }<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('./sw.js')
+      .then(() => console.log('Service Worker registrado correctamente'))
+      .catch((err) => console.log('Error al registrar el Service Worker', err));
+  }
+</script>
+
+</script>
+
+</body>
+</html>
