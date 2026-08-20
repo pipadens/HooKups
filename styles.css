@@ -107,6 +107,13 @@ body {
     text-shadow: 0 0 25px rgba(255, 215, 0, 0.4);
     margin-bottom: 10px;
 }
+.logo h1 {
+    background: linear-gradient(135deg, #f8fafc 0%, #cbd5e1 30%, #64748b 70%, #475569 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: bold;
+}
 .logo.chico { font-size: 2.8rem; }
 .tacon-rojo {
     font-size: 4rem;
