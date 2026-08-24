@@ -1,0 +1,335 @@
+/* === ESTILOS GENERALES (Terciopelo Púrpura y Oro Champán) === */
+:root {
+    --morado-fondo: #411957;       /* Púrpura mate profundo para elementos */
+    --morado-oscuro: #240a36;      /* Fondo principal de terciopelo oscuro */
+    --rojo: #5c1d2e;               /* Tono vino elegante para botones de acento */
+    --dorado: #e6c594;             /* Oro champán principal */
+    --dorado-borde: #c5a059;       /* Bordes y líneas sutiles */
+    --blanco: #FFFFFF;
+    --texto-suave: #d1bda8;        /* Textos secundarios cálidos */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+body {
+    background: linear-gradient(180deg, var(--morado-oscuro) 0%, var(--morado-fondo) 100%);
+    min-height: 100vh;
+    color: var(--blanco);
+    padding: 1rem;
+}
+
+.pantalla {
+    display: none;
+    flex-direction: column;
+    min-height: 95vh;
+    max-width: 950px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.pantalla.activa {
+    display: flex;
+}
+
+.barra-sup {
+    text-align: center;
+    font-size: 0.95rem;
+    color: var(--texto-suave);
+    margin-bottom: 0.5rem;
+}
+
+.logo {
+    text-align: center;
+    margin-bottom: 0.8rem;
+}
+
+.logo h1 {
+    font-size: 2.8rem;
+    color: var(--dorado);
+    letter-spacing: 3px;
+}
+
+.logo p {
+    font-size: 1.2rem;
+    font-style: italic;
+    color: var(--dorado);
+    margin-top: 0.2rem;
+}
+
+.descripcion {
+    text-align: center;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    padding: 0 1rem;
+    margin-bottom: 1rem;
+    color: var(--texto-suave);
+}
+
+.aviso {
+    border: 2px solid var(--dorado);
+    border-radius: 10px;
+    padding: 0.8rem;
+    text-align: center;
+    color: var(--dorado);
+    margin-bottom: 1.5rem;
+    background: rgba(230, 197, 148, 0.08);
+    font-size: 0.9rem;
+}
+
+.btn-fila {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.btn-morado {
+    width: 300px;
+    padding: 12px;
+    background: var(--morado-fondo);
+    border: 2px solid var(--dorado);
+    border-radius: 50px;
+    color: var(--dorado);
+    font-size: 1rem;
+    cursor: pointer;
+    transition: 0.2s;
+    font-weight: bold;
+}
+.btn-morado:hover { background: var(--morado-oscuro); color: var(--blanco); }
+
+.btn-rojo-fila {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.btn-rojo {
+    width: 160px;
+    padding: 10px;
+    background: var(--rojo);
+    border: 2px solid var(--dorado);
+    border-radius: 8px;
+    color: var(--dorado);
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+.btn-rojo:hover { opacity: 0.9; color: var(--blanco); }
+
+.enlace-creadora {
+    text-align: center;
+    color: var(--dorado);
+    text-decoration: underline;
+    cursor: pointer;
+    margin: 1rem 0;
+    font-weight: bold;
+}
+.enlace-creadora:hover { color: #ffffff; }
+
+.barra-inf {
+    display: flex;
+    justify-content: space-between;
+    margin-top: auto;
+    padding-top: 1rem;
+    font-size: 0.75rem;
+    color: var(--dorado);
+    border-top: 1px solid rgba(230,197,148,0.2);
+}
+
+.campo, select.campo, textarea.campo {
+    width: 100%;
+    padding: 10px;
+    margin: 0.3rem 0 0.8rem;
+    border: 2px solid var(--dorado);
+    border-radius: 8px;
+    background: rgba(0,0,0,0.4);
+    color: #fff;
+    font-size: 0.95rem;
+}
+
+.etiqueta {
+    color: var(--dorado);
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+.contenedor {
+    padding: 0 1rem;
+}
+
+.btn-atras {
+    color: var(--dorado);
+    cursor: pointer;
+    margin-bottom: 0.8rem;
+    display: inline-block;
+    font-weight: bold;
+}
+.btn-atras:hover { color: #ffffff; }
+
+.grid-planes {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin: 1rem 0;
+}
+
+.tarjeta-plan {
+    border: 2px solid var(--dorado);
+    border-radius: 12px;
+    padding: 1rem;
+    background: rgba(0,0,0,0.35);
+    text-align: center;
+}
+
+.tarjeta-plan h3 {
+    color: var(--dorado);
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+}
+
+.tarjeta-plan ul {
+    text-align: left;
+    font-size: 0.8rem;
+    margin-bottom: 1rem;
+    padding-left: 15px;
+    color: var(--texto-suave);
+}
+
+.btn-plan {
+    background: var(--rojo);
+    border: 2px solid var(--dorado);
+    color: var(--dorado);
+    padding: 6px 10px;
+    border-radius: 15px;
+    cursor: pointer;
+    margin: 3px 0;
+    font-size: 0.8rem;
+    display: block;
+    width: 100%;
+    font-weight: bold;
+    transition: 0.2s;
+}
+
+.btn-plan:hover {
+    background: var(--dorado);
+    color: #000;
+}
+
+.tarjeta-perfil {
+    border: 2px solid var(--dorado);
+    border-radius: 12px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    background: rgba(0,0,0,0.3);
+}
+
+.foto-perfil {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: linear-gradient(45deg, var(--morado-fondo), var(--dorado));
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+}
+
+.categoria-tag {
+    display: inline-block;
+    background: var(--dorado);
+    color: #000;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    margin: 0.2rem 0;
+}
+
+.precio {
+    color: var(--dorado);
+    font-size: 1rem;
+    font-weight: bold;
+    margin: 0.4rem 0;
+}
+
+.btn-contactar {
+    background: var(--rojo);
+    border: 2px solid var(--dorado);
+    color: var(--dorado);
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: bold;
+}
+
+.panel-tarjetas-metricas {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin: 1rem 0;
+}
+
+.metrica-card {
+    border: 2px solid var(--dorado);
+    border-radius: 10px;
+    padding: 0.8rem;
+    text-align: center;
+    background: rgba(0,0,0,0.4);
+}
+
+.metrica-card h4 {
+    color: var(--dorado);
+    font-size: 0.85rem;
+    margin-bottom: 0.3rem;
+}
+
+.metrica-card .valor {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--blanco);
+}
+
+.tabla-contenedor {
+    overflow-x: auto;
+    margin: 0.8rem 0;
+    border: 2px solid var(--dorado);
+    border-radius: 8px;
+    background: rgba(0,0,0,0.3);
+    max-height: 250px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    font-size: 0.82rem;
+}
+
+th, td {
+    padding: 8px 10px;
+    border-bottom: 1px solid rgba(230,197,148,0.3);
+}
+
+th {
+    background: rgba(230,197,148,0.15);
+    color: var(--dorado);
+    position: sticky;
+    top: 0;
+}
+
+.badge-cortesia { background: #27ae60; color: white; padding: 2px 6px; border-radius: 8px; font-size: 0.7rem; }
+.badge-suscrito { background: #2980b9; color: white; padding: 2px 6px; border-radius: 8px; font-size: 0.7rem; }
+
+@media(max-width: 768px) {
+    .grid-planes { grid-template-columns: 1fr; }
+    .panel-tarjetas-metricas { grid-template-columns: 1fr; }
+}
